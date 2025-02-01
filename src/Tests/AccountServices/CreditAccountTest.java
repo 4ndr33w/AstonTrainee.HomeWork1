@@ -15,7 +15,7 @@ class CreditAccountTest {
     @Test
     void withdrawSuccess() {
 
-        double withdrawAmount = 6000;
+        double withdrawAmount = 5999;
         double totalBalance = startBalance - withdrawAmount;
 
         Boolean withdrawResult = creditAccount.withdraw(withdrawAmount);
@@ -30,7 +30,7 @@ class CreditAccountTest {
 
     @Test
     void withdrawFail() {
-        double withdrawAmount = 6001;
+        double withdrawAmount = 6002;
         double totalBalance = startBalance - withdrawAmount;
 
         Boolean withdrawResult = creditAccount.withdraw(withdrawAmount);
