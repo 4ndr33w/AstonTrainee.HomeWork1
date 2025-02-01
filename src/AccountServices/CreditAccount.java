@@ -18,7 +18,7 @@ public class CreditAccount extends BankAccount implements TransactionFee {
 
         double fee = applyFee(amount);
 
-        if (balance - amount - fee >= (-creditLimit)) {
+        if (balance - (amount + fee)>= (-creditLimit)) {
             balance -= (amount + fee);
             return true;
         }

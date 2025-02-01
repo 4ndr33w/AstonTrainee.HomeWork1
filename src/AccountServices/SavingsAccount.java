@@ -32,6 +32,16 @@ public class SavingsAccount extends BankAccount implements InterestBearing {
 
     @Override
     public void deposit(double amount) {
-        balance += amount * monthlyInterestRate;
+        double sum = balance + amount;
+        balance += amount + sum * monthlyInterestRate;
+    }
+
+    // подумал, что стоит создать перегруженный метод с параметром,
+    // который будет указывать на срок вклада
+    public void deposit(double amount, int depositTerm) {
+
+        double interestRate = monthlyInterestRate * depositTerm;
+        double sum = balance + amount;
+        balance += amount + sum * interestRate;
     }
 }

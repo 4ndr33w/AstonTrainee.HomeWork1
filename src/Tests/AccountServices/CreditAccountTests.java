@@ -9,23 +9,26 @@ import static org.junit.jupiter.api.Assertions.*;
 class CreditAccountTests {
 
     private double startBalance = 1000;
+    private double transactionFee = 0.01;
     ClientAccount user = new ClientAccount(1, "Vasya Pupkin", startBalance );
     CreditAccount creditAccount = new CreditAccount(user);
 
     @Test
     void withdrawSuccess() {
 
-        double withdrawAmount = 5999;
+        double withdrawAmount = 5940;
         double totalBalance = startBalance - withdrawAmount;
 
-        Boolean withdrawResult = creditAccount.withdraw(withdrawAmount);
+        Boolean actualResult = creditAccount.withdraw(withdrawAmount);
 
-        assertTrue(withdrawResult);
+        double expectedResult = startBalance - (withdrawAmount + withdrawAmount * transactionFee);
+
+        assertTrue(actualResult);
         assertTrue(creditAccount.getBalance() >= (-5000));
-        assertEquals(totalBalance, creditAccount.getBalance());
+        assertEquals(expectedResult, creditAccount.getBalance());
 
-        System.out.println("withdrawResult: = " + withdrawResult);
-        System.out.println("totalBalance: = " + totalBalance);
+        System.out.println("actualBalance: = " + creditAccount.getBalance());
+        System.out.println("expectedBalance: = " + expectedResult );
     }
 
     @Test
@@ -53,5 +56,15 @@ class CreditAccountTests {
         assertEquals(totalBalance, creditAccount.getBalance());
 
         System.out.println("totalBalance: = " + totalBalance);
+    }
+
+    @Test
+    void applyFeeSuccess() {
+        double amount = 1000;
+        double fee = creditAccount.applyFee(amount);
+
+        assertEquals(amount * transactionFee, fee);
+
+        System.out.println("fee: = " + fee);
     }
 }
