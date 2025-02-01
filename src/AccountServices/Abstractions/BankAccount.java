@@ -1,13 +1,19 @@
 package AccountServices.Abstractions;
 
-import Models.ClientAccount;
+import Models.ClientModel;
+import Resources.StaticResources;
+
+import java.math.BigDecimal;
 
 public abstract class BankAccount {
-    protected long accountNumber;
-    protected double balance;
-    protected String accountHolder;
 
-    public double getBalance() {
+    protected double transactionLimit = StaticResources.TRANSACTION_LIMIT;
+
+    protected final long accountNumber;
+    protected BigDecimal balance;
+    protected final String accountHolder;
+
+    public BigDecimal getBalance() {
         return balance;
     }
 
@@ -15,23 +21,23 @@ public abstract class BankAccount {
         return accountHolder;
     }
 
-    public BankAccount(long accountNumber, double balance, String accountHolder) {
-        this.accountNumber = accountNumber;
-        this.balance = balance;
-        this.accountHolder = accountHolder;
+    public BankAccount(ClientModel clientModel) {
+        accountNumber = clientModel.getId();
+        balance = clientModel.getBalance();
+        accountHolder = clientModel.getName();
     }
 
-    public BankAccount(ClientAccount clientAccount) {
-        accountNumber = clientAccount.getId();
-        this.balance = clientAccount.getBalance();
-        this.accountHolder = clientAccount.getName();
+    public BankAccount(ClientModel clientModel, double transactionLimit) {
+        accountNumber = clientModel.getId();
+        balance = clientModel.getBalance();
+        accountHolder = clientModel.getName();
+        this.transactionLimit = transactionLimit;
     }
 
-    public abstract Boolean withdraw (double amount);
+    public abstract Boolean withdraw(double amount);
 
-    public Boolean deposit (double amount)
-    {
-        balance += amount;
-        return true;
+    public void deposit(double amount) {
+
+        balance = balance.add(new BigDecimal(amount)).stripTrailingZeros();
     }
 }
