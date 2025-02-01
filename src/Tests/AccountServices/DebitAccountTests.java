@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DebitAccountTest {
+class DebitAccountTests {
 
     private double startBalance = 1000;
     ClientAccount user = new ClientAccount(1, "Vasya Pupkin", startBalance );

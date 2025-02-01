@@ -16,7 +16,12 @@ public class SavingsAccount extends BankAccount implements InterestBearing {
 
     @Override
     public Boolean withdraw(double amount) {
-        return null;
+
+        if (balance >= amount) {
+            balance -= amount;
+            return true;
+        }
+        return false;
     }
 
     @Override
