@@ -1,21 +1,32 @@
 package AccountServices;
 
 import AccountServices.Abstractions.BankAccount;
-import Models.ClientAccount;
+import Models.ClientModel;
+import AccountServices.Abstractions.Interfaces.TransactionValidator;
 
-public class DebitAccount extends BankAccount {
+import java.math.BigDecimal;
 
-    public DebitAccount(ClientAccount clientAccount) {
-        super(clientAccount);
+public class DebitAccount extends BankAccount implements TransactionValidator {
+
+    public DebitAccount(ClientModel clientModel) {
+        super(clientModel, 10000);
     }
 
     @Override
     public Boolean withdraw(double amount) {
+        boolean isValidated = validate(amount);
+        boolean isTransactionCanBeExecuted = balance.compareTo(BigDecimal.valueOf(amount)) >= 0;
 
-        if (balance >= amount) {
-            balance -= amount;
+        if (isTransactionCanBeExecuted && isValidated) {
+            balance = balance.subtract(BigDecimal.valueOf(amount)).stripTrailingZeros();
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean validate(double amount) {
+
+        return amount <= transactionLimit;
     }
 }

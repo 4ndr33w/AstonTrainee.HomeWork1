@@ -30,3 +30,5 @@ bin/
 
 .idea/
 .gigaide/
+#resources/config.properties
+src/DbContexts/
