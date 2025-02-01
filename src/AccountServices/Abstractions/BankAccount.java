@@ -3,6 +3,7 @@ package AccountServices.Abstractions;
 import Models.ClientAccount;
 
 public abstract class BankAccount {
+
     protected long accountNumber;
     protected double balance;
     protected String accountHolder;
@@ -16,12 +17,11 @@ public abstract class BankAccount {
 
     public BankAccount(ClientAccount clientAccount) {
         accountNumber = clientAccount.getId();
-        this.balance = clientAccount.getBalance();
-        this.accountHolder = clientAccount.getName();
+        balance = clientAccount.getBalance();
+        accountHolder = clientAccount.getName();
     }
 
     public abstract Boolean withdraw (double amount);
-
 
     public void deposit (double amount)
     {

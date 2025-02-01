@@ -2,6 +2,7 @@ package Tests.AccountServices;
 
 import AccountServices.CreditAccount;
 import Models.ClientAccount;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,8 +11,15 @@ class CreditAccountTests {
 
     private double startBalance = 1000;
     private double transactionFee = 0.01;
-    ClientAccount user = new ClientAccount(1, "Vasya Pupkin", startBalance );
-    CreditAccount creditAccount = new CreditAccount(user);
+
+    ClientAccount user;
+    CreditAccount creditAccount;
+
+    @BeforeEach
+    public void setUp() {
+        user = new ClientAccount(1, "Vasya Pupkin", startBalance );
+        creditAccount = new CreditAccount(user);
+    }
 
     @Test
     void withdrawSuccess() {
@@ -19,30 +27,27 @@ class CreditAccountTests {
         double withdrawAmount = 5940;
         double totalBalance = startBalance - withdrawAmount;
 
-        Boolean actualResult = creditAccount.withdraw(withdrawAmount);
+        Boolean transactionResult = creditAccount.withdraw(withdrawAmount);
+        double expectedBalance = startBalance - (withdrawAmount + withdrawAmount * transactionFee);
 
-        double expectedResult = startBalance - (withdrawAmount + withdrawAmount * transactionFee);
-
-        assertTrue(actualResult);
+        assertTrue(transactionResult);
         assertTrue(creditAccount.getBalance() >= (-5000));
-        assertEquals(expectedResult, creditAccount.getBalance());
+        assertEquals(expectedBalance, creditAccount.getBalance());
 
         System.out.println("actualBalance: = " + creditAccount.getBalance());
-        System.out.println("expectedBalance: = " + expectedResult );
+        System.out.println("expectedBalance: = " + expectedBalance );
     }
 
     @Test
     void withdrawFail() {
         double withdrawAmount = 6002;
-        double totalBalance = startBalance - withdrawAmount;
 
-        Boolean withdrawResult = creditAccount.withdraw(withdrawAmount);
+        Boolean transactionResult = creditAccount.withdraw(withdrawAmount);
 
-        assertFalse(withdrawResult);
-        assertTrue(creditAccount.getBalance() >= (-5000));
+        assertFalse(transactionResult);
         assertEquals(startBalance, creditAccount.getBalance());
 
-        System.out.println("withdrawResult: = " + withdrawResult);
+        System.out.println("transactionResult: = " + transactionResult);
         System.out.println("totalBalance: = " + creditAccount.getBalance());
     }
 

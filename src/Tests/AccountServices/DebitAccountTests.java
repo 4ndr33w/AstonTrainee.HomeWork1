@@ -2,6 +2,7 @@ package Tests.AccountServices;
 
 import AccountServices.DebitAccount;
 import Models.ClientAccount;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,9 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class DebitAccountTests {
 
     private double startBalance = 1000;
-    ClientAccount user = new ClientAccount(1, "Vasya Pupkin", startBalance );
-    DebitAccount debitAccount = new DebitAccount(user);
-    Boolean withdrawResult;
+    Boolean transactionResult;
+
+    ClientAccount user;
+    DebitAccount debitAccount;
+
+    @BeforeEach
+    void setUp() {
+        user = new ClientAccount(1, "Vasya Pupkin", startBalance );
+        debitAccount = new DebitAccount(user);
+    }
 
     @Test
     void withdrawSuccess() {
@@ -19,13 +27,13 @@ class DebitAccountTests {
         double withdrawAmount = 900;
         double totalBalance = startBalance - withdrawAmount;
 
-        withdrawResult = debitAccount.withdraw(withdrawAmount );
+        transactionResult = debitAccount.withdraw(withdrawAmount );
 
-        assertTrue(withdrawResult);
+        assertTrue(transactionResult);
         assertTrue(debitAccount.getBalance() >= (0));
         assertEquals(totalBalance, debitAccount.getBalance());
 
-        System.out.println("withdrawResult: = " + withdrawResult);
+        System.out.println("withdrawResult: = " + transactionResult);
         System.out.println("totalBalance: = " + totalBalance);
     }
 
@@ -35,13 +43,13 @@ class DebitAccountTests {
         double withdrawAmount = 1001;
         double totalBalance = startBalance - withdrawAmount;
 
-        withdrawResult = debitAccount.withdraw(withdrawAmount );
+        transactionResult = debitAccount.withdraw(withdrawAmount );
 
-        assertFalse(withdrawResult);
+        assertFalse(transactionResult);
         assertTrue(debitAccount.getBalance() >= (0));
         assertEquals(startBalance, debitAccount.getBalance());
 
-        System.out.println("withdrawResult: = " + withdrawResult);
+        System.out.println("withdrawResult: = " + transactionResult);
         System.out.println("totalBalance: = " + totalBalance);
     }
 }
