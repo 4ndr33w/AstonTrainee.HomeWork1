@@ -10,15 +10,8 @@ public abstract class BankAccount {
     public double getBalance() {
         return balance;
     }
-
     public String getAccountHolder() {
         return accountHolder;
-    }
-
-    public BankAccount(long accountNumber, double balance, String accountHolder) {
-        this.accountNumber = accountNumber;
-        this.balance = balance;
-        this.accountHolder = accountHolder;
     }
 
     public BankAccount(ClientAccount clientAccount) {
@@ -29,9 +22,9 @@ public abstract class BankAccount {
 
     public abstract Boolean withdraw (double amount);
 
-    public Boolean deposit (double amount)
+
+    public void deposit (double amount)
     {
         balance += amount;
-        return true;
     }
 }

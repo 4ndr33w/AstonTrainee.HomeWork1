@@ -48,13 +48,9 @@ class CreditAccountTest {
         double depositAmount = 6000;
         double totalBalance = startBalance + depositAmount;
 
-        Boolean depositResult = creditAccount.deposit(depositAmount);
-
-        assertTrue(depositResult);
         assertTrue(creditAccount.getBalance() >= (-5000));
         assertEquals(totalBalance, creditAccount.getBalance());
 
-        System.out.println("depositResult: = " + depositResult);
         System.out.println("totalBalance: = " + totalBalance);
     }
 }
