@@ -47,6 +47,7 @@ class CreditAccountTest {
     void depositSuccess() {
         double depositAmount = 6000;
         double totalBalance = startBalance + depositAmount;
+        creditAccount.deposit(depositAmount);
 
         assertTrue(creditAccount.getBalance() >= (-5000));
         assertEquals(totalBalance, creditAccount.getBalance());
