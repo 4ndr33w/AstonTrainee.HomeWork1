@@ -1,4 +1,4 @@
-package Tests.TransactionServices.Interfaces;
+package AccountServices.Abstractions.Interfaces;
 
 public interface TransactionValidator {
 

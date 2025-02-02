@@ -3,7 +3,7 @@ package AccountServices;
 import AccountServices.Abstractions.BankAccount;
 import AccountServices.Abstractions.Interfaces.TransactionFee;
 import Models.ClientAccount;
-import Tests.TransactionServices.Interfaces.TransactionValidator;
+import AccountServices.Abstractions.Interfaces.TransactionValidator;
 
 public class CreditAccount extends BankAccount implements TransactionFee, TransactionValidator {
 

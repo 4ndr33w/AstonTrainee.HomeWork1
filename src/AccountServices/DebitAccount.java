@@ -2,7 +2,7 @@ package AccountServices;
 
 import AccountServices.Abstractions.BankAccount;
 import Models.ClientAccount;
-import Tests.TransactionServices.Interfaces.TransactionValidator;
+import AccountServices.Abstractions.Interfaces.TransactionValidator;
 
 public class DebitAccount extends BankAccount implements TransactionValidator {
 
