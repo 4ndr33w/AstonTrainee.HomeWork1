@@ -25,12 +25,14 @@ class DebitAccountTests {
     void withdrawSuccess() {
 
         double withdrawAmount = 900;
+        double operationLimit = 5000;
         double totalBalance = startBalance - withdrawAmount;
 
         transactionResult = debitAccount.withdraw(withdrawAmount );
 
         assertTrue(transactionResult);
         assertTrue(debitAccount.getBalance() >= (0));
+        assertTrue(withdrawAmount <= operationLimit);
         assertEquals(totalBalance, debitAccount.getBalance());
 
         System.out.println("withdrawResult: = " + transactionResult);

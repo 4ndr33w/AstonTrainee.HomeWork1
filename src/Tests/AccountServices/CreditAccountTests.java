@@ -24,14 +24,17 @@ class CreditAccountTests {
     @Test
     void withdrawSuccess() {
 
-        double withdrawAmount = 5940;
+        double withdrawAmount = 4940;
+        double operationLimit = 5000;
+        double creditLimit = -5000;
         double totalBalance = startBalance - withdrawAmount;
 
         Boolean transactionResult = creditAccount.withdraw(withdrawAmount);
         double expectedBalance = startBalance - (withdrawAmount + withdrawAmount * transactionFee);
 
         assertTrue(transactionResult);
-        assertTrue(creditAccount.getBalance() >= (-5000));
+        assertTrue(creditAccount.getBalance() >= creditLimit);
+        assertTrue(withdrawAmount <= operationLimit);
         assertEquals(expectedBalance, creditAccount.getBalance());
 
         System.out.println("actualBalance: = " + creditAccount.getBalance());
