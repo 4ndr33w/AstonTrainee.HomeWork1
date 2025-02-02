@@ -2,16 +2,16 @@ package AccountServices.Abstractions;
 
 import Models.ClientAccount;
 
+import java.math.BigDecimal;
+
 public abstract class BankAccount {
+
     protected long accountNumber;
-    protected double balance;
+    protected BigDecimal balance;
     protected String accountHolder;
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
-    }
-    public String getAccountHolder() {
-        return accountHolder;
     }
 
     public BankAccount(ClientAccount clientAccount) {
@@ -22,9 +22,8 @@ public abstract class BankAccount {
 
     public abstract Boolean withdraw (double amount);
 
-
     public void deposit (double amount)
     {
-        balance += amount;
+        balance = balance.add(BigDecimal.valueOf(amount));
     }
 }

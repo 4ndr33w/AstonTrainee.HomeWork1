@@ -4,10 +4,12 @@ import AccountServices.Abstractions.BankAccount;
 import AccountServices.Abstractions.Interfaces.TransactionFee;
 import Models.ClientAccount;
 
+import java.math.BigDecimal;
+
 public class CreditAccount extends BankAccount implements TransactionFee {
 
-    private double creditLimit = 5000;
-    private double transactionFee = 0.01;
+    private final double CREDIT_LIMIT = 5000;
+    private final double TRANSACTION_FEE = 0.01;
 
     public CreditAccount(ClientAccount clientAccount) {
         super(clientAccount);
@@ -17,9 +19,10 @@ public class CreditAccount extends BankAccount implements TransactionFee {
     public Boolean withdraw(double amount) {
 
         double fee = applyFee(amount);
+        BigDecimal balanceAfterTransaction = balance.subtract((BigDecimal.valueOf(amount + fee)));
 
-        if (balance - (amount + fee)>= (-creditLimit)) {
-            balance -= (amount + fee);
+        if (balanceAfterTransaction.compareTo(BigDecimal.valueOf(CREDIT_LIMIT))>= 0) {
+            balance = balanceAfterTransaction;
             return true;
         }
         return false;
@@ -27,6 +30,6 @@ public class CreditAccount extends BankAccount implements TransactionFee {
 
     @Override
     public double applyFee(double amount) {
-        return amount * transactionFee;
+        return amount * TRANSACTION_FEE;
     }
 }

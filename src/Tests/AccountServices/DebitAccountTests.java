@@ -4,11 +4,13 @@ import AccountServices.DebitAccount;
 import Models.ClientAccount;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DebitAccountTests {
 
-    private double startBalance = 1000;
+    private BigDecimal startBalance = 1000;
     ClientAccount user = new ClientAccount(1, "Vasya Pupkin", startBalance );
     DebitAccount debitAccount = new DebitAccount(user);
     Boolean withdrawResult;

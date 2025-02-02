@@ -1,6 +1,8 @@
 package AccountServices.Abstractions.Interfaces;
 
+import java.math.BigDecimal;
+
 public interface InterestBearing {
 
-    public double applyInterest();
+    public BigDecimal applyInterest();
 }

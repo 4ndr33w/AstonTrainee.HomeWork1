@@ -4,11 +4,13 @@ import AccountServices.CreditAccount;
 import Models.ClientAccount;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CreditAccountTests {
 
-    private double startBalance = 1000;
+    private BigDecimal startBalance = 1000;
     private double transactionFee = 0.01;
     ClientAccount user = new ClientAccount(1, "Vasya Pupkin", startBalance );
     CreditAccount creditAccount = new CreditAccount(user);

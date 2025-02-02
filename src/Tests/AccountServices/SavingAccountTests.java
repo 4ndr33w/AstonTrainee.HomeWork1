@@ -1,14 +1,15 @@
 package Tests.AccountServices;
 
-import AccountServices.DebitAccount;
 import AccountServices.SavingsAccount;
 import Models.ClientAccount;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SavingAccountTests {
-    private double startBalance = 1000;
+    private BigDecimal startBalance = 1000;
     ClientAccount user = new ClientAccount(1, "Vasya Pupkin", startBalance );
     SavingsAccount debitAccount = new SavingsAccount(user);
     Boolean withdrawResult;

@@ -3,6 +3,8 @@ package AccountServices;
 import AccountServices.Abstractions.BankAccount;
 import Models.ClientAccount;
 
+import java.math.BigDecimal;
+
 public class DebitAccount extends BankAccount {
 
     public DebitAccount(ClientAccount clientAccount) {
@@ -12,8 +14,9 @@ public class DebitAccount extends BankAccount {
     @Override
     public Boolean withdraw(double amount) {
 
-        if (balance >= amount) {
-            balance -= amount;
+        BigDecimal balanceAfterTransaction = balance.subtract(new BigDecimal(amount));
+        if (balance.compareTo(new BigDecimal(amount)) >= 0) {
+            balance = balanceAfterTransaction;
             return true;
         }
         return false;
