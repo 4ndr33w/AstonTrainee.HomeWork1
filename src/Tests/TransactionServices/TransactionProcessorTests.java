@@ -9,9 +9,8 @@ import TransactionServices.TransactionProcessor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -108,9 +107,9 @@ public class TransactionProcessorTests {
     private ArrayList<BankAccount> getAccountCollection() {
         ArrayList<BankAccount> collection = new ArrayList<BankAccount>();
 
-        collection.add(new DebitAccount(new ClientAccount(0, "Andreew McFly", 1000)));
-        collection.add(new CreditAccount(new ClientAccount(1, "Vasya Pupkin", 1000)));
-        collection.add(new SavingsAccount(new ClientAccount(2, "Andron Kamikadzevixh", 1000)));
+        collection.add(new DebitAccount(new ClientAccount(0, "Andreew McFly", BigDecimal.valueOf(1000))));
+        collection.add(new CreditAccount(new ClientAccount(1, "Vasya Pupkin", BigDecimal.valueOf(1000))));
+        collection.add(new SavingsAccount(new ClientAccount(2, "Andron Kamikadzevixh", BigDecimal.valueOf(1000))));
 
         return collection;
     }

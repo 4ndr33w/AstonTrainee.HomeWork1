@@ -5,17 +5,16 @@ import AccountServices.Abstractions.Interfaces.TransactionFee;
 import Models.ClientAccount;
 import AccountServices.Abstractions.Interfaces.TransactionValidator;
 
+import java.math.BigDecimal;
+
 public class CreditAccount extends BankAccount implements TransactionFee, TransactionValidator {
 
-    private double creditLimit = 5000;
-    private double transactionFee = 0.01;
-
+    private final double CREDIT_LIMIT = 5000;
+    private final double TRANSACTION_FEE = 0.01;
 
 
     public CreditAccount(ClientAccount clientAccount) {
         super(clientAccount);
-
-        transactionLimit = 5000;
     }
 
     @Override
@@ -23,10 +22,12 @@ public class CreditAccount extends BankAccount implements TransactionFee, Transa
 
         double fee = applyFee(amount);
         Boolean isValidated = validate(amount);
-        Boolean isTransactionResultNonNegative = balance - (amount + fee) >= (-creditLimit);
+        BigDecimal balanceAfterTransaction = balance.subtract(BigDecimal.valueOf(amount + fee));
+        Boolean isTransactionResultNonNegative = balanceAfterTransaction.
+                compareTo(BigDecimal.valueOf(-CREDIT_LIMIT)) >= 0;
 
         if (isTransactionResultNonNegative && isValidated) {
-            balance -= (amount + fee);
+            balance = balanceAfterTransaction;
             return true;
         }
         return false;
@@ -34,13 +35,13 @@ public class CreditAccount extends BankAccount implements TransactionFee, Transa
 
     @Override
     public double applyFee(double amount) {
-        return amount * transactionFee;
+        return amount * TRANSACTION_FEE;
     }
 
     @Override
     public boolean validate(double amount) {
 
-        if(amount <= transactionLimit) {
+        if(amount <= TRANSACTION_LIMIT) {
             return true;
         }
         return false;

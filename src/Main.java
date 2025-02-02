@@ -5,6 +5,7 @@ import AccountServices.SavingsAccount;
 import Models.ClientAccount;
 import TransactionServices.TransactionProcessor;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +48,9 @@ public class Main {
     private static ArrayList<BankAccount> getAccountCollection() {
         ArrayList<BankAccount> collection = new ArrayList<BankAccount>();
 
-        collection.add(new DebitAccount(new ClientAccount(0, "Andreew McFly", 1000)));
-        collection.add(new CreditAccount(new ClientAccount(1, "Vasya Pupkin", 1000)));
-        collection.add(new SavingsAccount(new ClientAccount(2, "Andron Kamikadzevixh", 1000)));
+        collection.add(new DebitAccount(new ClientAccount(0, "Andr33w McFly", BigDecimal.valueOf(1000))));
+        collection.add(new CreditAccount(new ClientAccount(1, "Vasya Pupkin", BigDecimal.valueOf(1000))));
+        collection.add(new SavingsAccount(new ClientAccount(2, "Andron Kamikadzeviсh", BigDecimal.valueOf(1000))));
 
         return collection;
     }
