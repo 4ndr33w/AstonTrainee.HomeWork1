@@ -8,6 +8,8 @@ public abstract class BankAccount {
     protected double balance;
     protected String accountHolder;
 
+    protected double transactionLimit;
+
     public double getBalance() {
         return balance;
     }
